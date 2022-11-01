@@ -1,3 +1,5 @@
+using System;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,8 +7,21 @@ public class PlayerController : MonoBehaviour
 {
     #region Inspector
     
-    [Header("Movement")]
+    [Header("Slope Movement")]
+    
+    [Min(0)]
+    [SerializeField] private float pullDownForce = 5f;
+    
+    [SerializeField] private LayerMask layerMask;
+    
+    [Min(0)]
+    [SerializeField] private float raycastLength = 0.5f;
 
+    [Min(0)]
+    [SerializeField] private float coyoteTime = 0.2f;
+    
+    [Header("Movement")]
+    
     [Min(0)]
     [Tooltip("The maximum speed of the player in uu/s.")]
     [SerializeField] private float movementSpeed = 5f;
@@ -14,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [Min(0)]
     [Tooltip("How fast the movement speed is in-/decreasing.")]
     [SerializeField] private float speedChangeRate = 10f;
-
+    
     [Min(0)]
     [SerializeField] private float rotationSpeed = 10f;
 
@@ -54,7 +69,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookInput;
     private Vector2 cameraRotation;
     private Quaternion characterTargetRotation = Quaternion.identity;
-
+    private bool isGrounded = true;
+    private float airTime;
+    private Interactable selectedInteractable;
+    
     #region UnityEventFunctions
 
     private void Awake()
@@ -63,6 +81,8 @@ public class PlayerController : MonoBehaviour
         input = new GameInput();
         moveAction = input.Player.Move;
         lookAction = input.Player.Look;
+
+        input.Player.Interact.performed += Interact;
     }
 
     private void OnEnable()
@@ -75,6 +95,7 @@ public class PlayerController : MonoBehaviour
         ReadInput();
         Rotate(moveInput);
         Move(moveInput);
+        CheckGround();
     }
 
     private void LateUpdate()
@@ -89,9 +110,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        
+        input.Player.Interact.performed -= Interact;
+    }
+    
+    #region Physics
+
+    private void OnTriggerEnter(Collider other)
+    {
+        TrySelectInteractable(other);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        TryDeselectInteractable(other);
     }
 
+    #endregion
+    
     #endregion
 
     #region Movement
@@ -145,8 +179,34 @@ public class PlayerController : MonoBehaviour
         characterController.SimpleMove(movement);
 
         lastMovement = movement;
+
+        if (Physics.Raycast(transform.position + Vector3.up * 0.01f, Vector3.down, out RaycastHit hit, raycastLength, layerMask, QueryTriggerInteraction.Ignore))
+        {
+            if (Vector3.ProjectOnPlane(movement, hit.normal).y < 0)
+            {
+                characterController.Move(Vector3.down * (pullDownForce * Time.deltaTime));
+            }
+        }
     }
 
+    #endregion
+    
+    #region Ground Check
+
+    private void CheckGround()
+    {
+        if (characterController.isGrounded)
+        {
+            airTime = 0;
+        }
+        else
+        {
+            airTime += Time.deltaTime;
+        }
+
+        isGrounded = airTime < coyoteTime;
+    }
+    
     #endregion
     
     #region Input
@@ -219,4 +279,50 @@ public class PlayerController : MonoBehaviour
     }
     
     #endregion
+
+    #region Interaction
+
+    private void Interact(InputAction.CallbackContext _)
+    {
+        if (selectedInteractable != null)
+        {
+            selectedInteractable.Interact();
+        }
+    }
+
+    private void TrySelectInteractable(Collider other)
+    {
+        Interactable interactable = other.GetComponent<Interactable>();
+
+        if (interactable == null)
+        {
+            return;
+        }
+
+        if (selectedInteractable != null)
+        {
+            return;
+        }
+
+        selectedInteractable = interactable;
+        selectedInteractable.Select();
+    }
+    private void TryDeselectInteractable(Collider other)
+    {
+        Interactable interactable = other.GetComponent<Interactable>();
+
+        if (interactable == null)
+        {
+            return;
+        }
+
+        if (interactable == selectedInteractable)
+        {
+            selectedInteractable.Deselect();
+            selectedInteractable = null;
+        }
+    }
+
+    #endregion
 }
+//Animator Region.
