@@ -1,6 +1,4 @@
 {
-    "m_Name": "Settings",
-    "m_Path": "ProjectSettings/Packages/com.unity.probuilder/Settings.json",
     "m_Dictionary": {
         "m_DictionaryValues": [
             {
@@ -186,12 +184,12 @@
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastPivotPosition",
-                "value": "{\"m_Value\":{\"x\":-18.714275360107423,\"y\":-0.00009999999747378752,\"z\":37.24876022338867}}"
+                "value": "{\"m_Value\":{\"x\":-16.055984497070314,\"y\":-0.00009999999747378752,\"z\":12.30206298828125}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize",
-                "value": "{\"m_Value\":{\"x\":37.42854690551758,\"y\":0.0,\"z\":-74.49752044677735}}"
+                "value": "{\"m_Value\":{\"x\":32.11195373535156,\"y\":0.0,\"z\":-24.6041259765625}}"
             },
             {
                 "type": "UnityEngine.Quaternion, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
