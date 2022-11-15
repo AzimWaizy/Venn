@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        input.Enable();
+        EnableInput();
     }
 
     private void Update()
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        input.Disable();
+        DisableInput();
     }
 
     private void OnDestroy()
@@ -210,7 +210,17 @@ public class PlayerController : MonoBehaviour
     #endregion
     
     #region Input
-    
+
+    public void EnableInput()
+    {
+        input.Enable();
+    }
+
+    public void DisableInput()
+    {
+        input.Disable();
+    }
+
     private void ReadInput()
     {
         moveInput = moveAction.ReadValue<Vector2>();
