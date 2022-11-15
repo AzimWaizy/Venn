@@ -15,7 +15,8 @@ public class DialogueController : MonoBehaviour
 
     public static event Action DialogueOpened;
     public static event Action DialogueClosed;
-    
+    public static event Action<string> InkEvent; 
+
     #region Inspector
 
     [Header("Ink")]
@@ -34,6 +35,7 @@ public class DialogueController : MonoBehaviour
     {
         inkStory = new Story(inkAsset.text);
         inkStory.onError += OnInkError;
+        inkStory.BindExternalFunction<string>("Unity_Event", Unity_Event);
     }
 
     private void OnEnable()
@@ -202,6 +204,11 @@ public class DialogueController : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
             
+    }
+
+    private void Unity_Event(string eventName)
+    {
+        InkEvent?.Invoke(eventName);
     }
 
     #endregion
