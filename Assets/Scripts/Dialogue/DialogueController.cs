@@ -1,10 +1,18 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using Ink;
 using Ink.Runtime;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DialogueController : MonoBehaviour
 {
+    private const string SpeakerSeparator = ":";
+    private const string EscapeColonPlaceholder = "$";
+    private const string EscapeColon = "::";
+
     public static event Action DialogueOpened;
     public static event Action DialogueClosed;
     
@@ -31,6 +39,7 @@ public class DialogueController : MonoBehaviour
     private void OnEnable()
     {
         DialogueBox.DialogueContinued += OnDialogueContinued;
+        DialogueBox.ChoiceSelected += OnChoiceSelected;
     }
 
     private void Start()
@@ -41,6 +50,7 @@ public class DialogueController : MonoBehaviour
     private void OnDisable()
     {
         DialogueBox.DialogueContinued -= OnDialogueContinued;
+        DialogueBox.ChoiceSelected -= OnChoiceSelected;
     }
 
     private void OnDestroy()
@@ -71,6 +81,8 @@ public class DialogueController : MonoBehaviour
     {
         dialogueBox.gameObject.SetActive(false);
         
+        EventSystem.current.SetSelectedGameObject(null);
+        
         DialogueClosed?.Invoke();
     }
 
@@ -82,26 +94,82 @@ public class DialogueController : MonoBehaviour
             return;
         }
 
-        DialogueLine line = new DialogueLine();
-        
+        DialogueLine line;
         if (CanContinue())
         {
             string inkLine = inkStory.Continue();
-            // TODO Parse text.
-            line.text = inkLine;
+            if (string.IsNullOrWhiteSpace(inkLine))
+            {
+                ContinueDialogue();
+            }
+
+            line = ParseText(inkLine, inkStory.currentTags);
         }
+        else
+        {
+            line = new DialogueLine();
+        }
+
+        line.choices = inkStory.currentChoices;
         
         dialogueBox.DisplayText(line);
+    }
+
+    private void SelectChoice(int choiceIndex)
+    {
+        inkStory.ChooseChoiceIndex(choiceIndex);
+        ContinueDialogue();
     }
 
     private void OnDialogueContinued(DialogueBox _)
     {
         ContinueDialogue();
     }
+
+    private void OnChoiceSelected(DialogueBox _, int choiceIndex)
+    {
+        SelectChoice(choiceIndex);
+    }
     
     #endregion
 
     #region Ink
+
+    private DialogueLine ParseText(string inkLine, List<string> inkStoryCurrentTags)
+    {
+        inkLine = inkLine.Replace(EscapeColon, EscapeColonPlaceholder);
+        
+        List<string> parts = inkLine.Split(SpeakerSeparator).ToList();
+
+        string speaker;
+        string text;
+
+        switch (parts.Count)
+        {
+            case 1:
+                speaker = null;
+                text = parts[0];
+                break;
+            case 2:
+                speaker = parts[0];
+                text = parts[1];
+                break;
+            default:
+                Debug.LogWarning($"Ink dialogue line split at more {SpeakerSeparator} than expected. Please make sure to use {EscapeColon} for {SpeakerSeparator} inside text.");
+                goto case 2;
+        }
+
+        DialogueLine line = new DialogueLine();
+        line.speaker = speaker?.Trim();
+        line.text = text.Replace(EscapeColon, EscapeColonPlaceholder).Trim();
+
+        if (inkStoryCurrentTags.Contains("thought"))
+        {
+            line.text = $"<i>{line.text}</i>";
+        }
+
+        return line;
+    }
 
     private bool CanContinue()
     {
@@ -143,4 +211,5 @@ public struct DialogueLine
 {
     public string speaker;
     public string text;
+    public List<Choice> choices;
 }

@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2528106144580847936}
   - component: {fileID: 8862247124643728044}
+  - component: {fileID: 6107217342249963408}
   m_Layer: 0
   m_Name: InteractableMarker
   m_TagString: Untagged
@@ -116,6 +117,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6107217342249963408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7851234499371902101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c294feb17069249bd3b9dc7806f040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8351332417831321034
 GameObject:
   m_ObjectHideFlags: 0
