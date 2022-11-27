@@ -48,7 +48,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClipping: 0.4
+    - _AlphaClipping: 0
     - _CloudAlpha: 3
     - _CloudsPower: 0.7
     - _CloudsScale: 120
@@ -58,6 +58,6 @@ Material:
     - _VertexOffset: 0.001
     m_Colors:
     - _CloudSpeed: {r: 0, g: 0.05, b: 0, a: 0}
-    - _Color: {r: 2.433572, g: 2.433572, b: 2.433572, a: 1}
+    - _Color: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
     - _DistortSpeed: {r: 0, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []
