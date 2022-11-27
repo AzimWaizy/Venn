@@ -49,10 +49,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClipping: 0.4
-    - _CloudAlpha: 3.5
-    - _CloudsPower: 0.75
+    - _CloudAlpha: 3
+    - _CloudsPower: 0.7
     - _CloudsScale: 120
-    - _DistortScale: 60
+    - _DistortScale: 66.43
     - _QueueControl: 0
     - _QueueOffset: 0
     - _VertexOffset: 0.001

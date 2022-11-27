@@ -29,7 +29,7 @@ public class GameState : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(id))
         {
-            Debug.Log("Id od state is empty. Make sure to give each state an id.", this);
+            Debug.Log("Id id state is empty. Make sure to give each state an id.", this);
             return;
         }
 

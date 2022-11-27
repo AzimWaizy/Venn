@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -27,7 +25,7 @@ public class Reactor : MonoBehaviour
 
     private void Awake()
     {
-        GameState.StateChanged += CheckConditions;
+        gameState = FindObjectOfType<GameState>();
     }
 
     private void OnEnable()
