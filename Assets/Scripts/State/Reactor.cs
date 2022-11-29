@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+
+using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +18,9 @@ public class Reactor : MonoBehaviour
     [Tooltip("Invoked when the conditions return to being unfulfilled.")]
     [SerializeField] private UnityEvent onUnfulfilled;
 
+    [Tooltip("Optional field to reference a QuestEntry, if this reactor represents a quest.")]
+    [SerializeField] private QuestEntry questEntry;
+
     #endregion
 
     private bool fulfilled = false;
@@ -30,12 +36,22 @@ public class Reactor : MonoBehaviour
 
     private void OnEnable()
     {
+        if (questEntry != null)
+        {
+            questEntry.GameObject().SetActive(true);
+        }
+        
         CheckConditions();
         GameState.StateChanged += CheckConditions;
     }
 
     private void OnDisable()
     {
+        if (questEntry != null)
+        {
+            questEntry.GameObject().SetActive(false);
+        }
+        
         GameState.StateChanged -= CheckConditions;
     }
 
@@ -48,11 +64,21 @@ public class Reactor : MonoBehaviour
         // From false -> true
         if (!fulfilled && newFulFilled)
         {
+            if (questEntry != null)
+            {
+                questEntry.GameObject().SetActive(true);
+            }
+            
             onFulfilled.Invoke();
         }
         // From true -> false 
         else if (fulfilled && !newFulFilled)
         {
+            if (questEntry != null)
+            {
+                questEntry.GameObject().SetActive(false);
+            }
+            
             onUnfulfilled.Invoke();
         }
 
