@@ -49,8 +49,10 @@ public class PlayerController : MonoBehaviour
     
     [Range(0f, 2f)]
     [SerializeField] private float mouseCameraSensitivity = 1f;
-    
+
     [Header("Controller Settings")]
+
+    [SerializeField] private Animator animator;
     
     [Range(0f, 2f)]
     [SerializeField] private float controllerCameraSensitivity = 1f;
@@ -60,6 +62,8 @@ public class PlayerController : MonoBehaviour
     
     #endregion
 
+    private static readonly int MovementSpeed = Animator.StringToHash("MoveSpeed");
+    private static readonly int Grounded = Animator.StringToHash("Grounded");
     private CharacterController characterController;
     private GameInput input;
     private InputAction moveAction;
@@ -96,6 +100,7 @@ public class PlayerController : MonoBehaviour
         Rotate(moveInput);
         Move(moveInput);
         CheckGround();
+        UpdateAnimator();
     }
 
     private void LateUpdate()
@@ -334,5 +339,18 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    #region Animator
+
+    private void UpdateAnimator()
+    {
+        Vector3 velocity = lastMovement;
+        velocity.y = 0;
+        float speed = velocity.magnitude;
+        
+        animator.SetFloat(MovementSpeed, speed);
+        animator.SetBool(Grounded, isGrounded);
+    }
+
+    #endregion
 }
-//Animator Region.

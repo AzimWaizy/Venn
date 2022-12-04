@@ -8,22 +8,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Dark Leaves
-    second: {fileID: 2100000, guid: 416bde07152d63343afe1741c0e485ea, type: 2}
+    second: {fileID: 2100000, guid: c01bce844d407a74f8bfcf6d46131c21, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Leaves
-    second: {fileID: 2100000, guid: 4b46c48ba648c8a42bdfa278b23f0cd9, type: 2}
+    second: {fileID: 2100000, guid: 509e4884779775e449156640eaf9aa07, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: LightLeaves
-    second: {fileID: 2100000, guid: 8bd86324063b0144c8d2ca2cc5860326, type: 2}
+    second: {fileID: 2100000, guid: 0d5fd5ca31335cc4cabf48ef76671e48, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: WoodHandle
-    second: {fileID: 2100000, guid: 80c768fa80a62474e993ac3540279572, type: 2}
+    second: {fileID: 2100000, guid: 74a73744a444d24468dc57c4b72d0fa8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
