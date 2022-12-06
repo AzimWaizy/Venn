@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5169894602474829524}
   - component: {fileID: 8075231392091847025}
   - component: {fileID: 6337703096632167867}
-  - component: {fileID: 8117407629981106591}
+  - component: {fileID: 1664826457832666419}
   m_Layer: 0
   m_Name: "Gro\xDFerBaum"
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8117407629981106591
-MeshCollider:
+--- !u!136 &1664826457832666419
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,7 +97,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2124705421725058983, guid: 458cad45208931f4699b67bee604c5c1, type: 3}
+  m_Radius: 1.2
+  m_Height: 46.587135
+  m_Direction: 1
+  m_Center: {x: 0, y: -7.687821, z: 0}

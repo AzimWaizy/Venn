@@ -9,7 +9,42 @@ ModelImporter:
   - first:
       74: 5508062484833401239
     second: Armature|Idle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Backpack-Lower-Part
+    second: {fileID: 2100000, guid: 220decf80df93bb40915c541c2992c54, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Backpack-Upper-Part
+    second: {fileID: 2100000, guid: a65b9687e01e51141be10f018819363d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 6ed2f1d24b5c80a46b6d487e57eb2f92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cloth
+    second: {fileID: 2100000, guid: e3252e72163ad9a4aab525321015c516, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 3f9ad070940c1ae409c585baa08c9ab6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nose
+    second: {fileID: 2100000, guid: 7aeafb6cb92889047b11813665005839, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scarf
+    second: {fileID: 2100000, guid: 620a9b452380e004fa3f67a27b45d3bc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

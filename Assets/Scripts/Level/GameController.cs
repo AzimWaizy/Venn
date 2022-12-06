@@ -1,8 +1,5 @@
-using System;
-using System.Security;
-
 using UnityEngine;
-using UnityEngine.TestTools;
+using Cursor = UnityEngine.Cursor;
 
 public class GameController : MonoBehaviour
 {
@@ -46,15 +43,21 @@ public class GameController : MonoBehaviour
 
     #region Modes
 
-    private void EnterPlayMode()
+    public void EnterPlayMode()
     {
         Cursor.lockState = CursorLockMode.Locked;
         player.EnableInput();
     }
 
-    private void EnterDialogueMode()
+    public void EnterDialogueMode()
     {
         Cursor.lockState = CursorLockMode.None;
+        player.DisableInput();
+    }
+
+    public void EnterCutSceneMode()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
         player.DisableInput();
     }
 

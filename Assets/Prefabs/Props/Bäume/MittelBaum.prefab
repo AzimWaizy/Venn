@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9126639486875650951}
   - component: {fileID: 5262330645879309346}
   - component: {fileID: 7990364985263468776}
-  - component: {fileID: 7298190332775303544}
+  - component: {fileID: 8377275516452816395}
   m_Layer: 0
   m_Name: MittelBaum
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7298190332775303544
-MeshCollider:
+--- !u!136 &8377275516452816395
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,7 +97,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7984743259097227910, guid: 890706c436831274eb9dcd2a211655c5, type: 3}
+  m_Radius: 1.53
+  m_Height: 26.595718
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.2978468, z: 0}
