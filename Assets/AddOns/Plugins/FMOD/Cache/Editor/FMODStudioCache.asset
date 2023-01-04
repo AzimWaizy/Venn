@@ -223,7 +223,7 @@ MonoBehaviour:
   - {fileID: 2961955549171243226}
   StringsBanks:
   - {fileID: 157095226514805834}
-  cacheTime: 637878895382161463
+  cacheTime: 638053939237780241
   cacheVersion: 131593
 --- !u!114 &157095226514805834
 MonoBehaviour:
@@ -240,7 +240,7 @@ MonoBehaviour:
   Path: FMODAssets/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637878895382161463
+  lastModified: 638053939237780241
   FileSizes:
   - Name: 
     Value: 1448
@@ -338,7 +338,7 @@ MonoBehaviour:
   Path: FMODAssets/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637878895382156503
+  lastModified: 638053939237770240
   FileSizes: []
   Exists: 1
 --- !u!114 &3744964564831711141
