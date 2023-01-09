@@ -49,15 +49,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClipping: 0
-    - _CloudAlpha: 3.5
+    - _CloudAlpha: 0.7
     - _CloudsPower: 0.7
     - _CloudsScale: 120
-    - _DistortScale: 66.43
+    - _DistortScale: 66
     - _QueueControl: 0
     - _QueueOffset: 0
     - _VertexOffset: 0.001
     m_Colors:
-    - _CloudSpeed: {r: 0, g: 0.05, b: 0, a: 0}
+    - _CloudSpeed: {r: 0, g: 1, b: 0, a: 0}
     - _Color: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
     - _DistortSpeed: {r: 0, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []
