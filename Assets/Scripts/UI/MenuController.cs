@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    public static event Action BaseMenuOpening;
+    public static event Action BaseMenuClosed;
+    
     #region Inspector
 
     [SerializeField] private string startScene = "Scenes/Venn_Level_Intro";
@@ -17,6 +20,8 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Menu baseMenu;
 
     [SerializeField] private bool preventBaseClosing;
+
+    [SerializeField] private bool hidePreviousMenu;
 
     #endregion
 
@@ -33,6 +38,9 @@ public class MenuController : MonoBehaviour
         input.UI.GoBackMenu.performed += GoBackMenu;
 
         openMenus = new Stack<Menu>();
+        
+        // Reset Time Scale on Start
+        Time.timeScale = 1;
     }
 
     private void Start()
@@ -86,6 +94,16 @@ public class MenuController : MonoBehaviour
 
     public void OpenMenu(Menu menu)
     {
+        if (menu == baseMenu)
+        {
+            BaseMenuOpening?.Invoke();
+        }
+
+        if (hidePreviousMenu && openMenus.Count > 0)
+        {
+            openMenus.Peek().Hide();
+        }
+        
         menu.Open();
         // Add menu to the stack.
         openMenus.Push(menu);
@@ -106,6 +124,16 @@ public class MenuController : MonoBehaviour
         // Remove top most menu from the stack.
         Menu closingMenu = openMenus.Pop();
         closingMenu.Close();
+
+        if (hidePreviousMenu && openMenus.Count > 0)
+        {
+            openMenus.Peek().Show();
+        }
+
+        if (closingMenu == baseMenu)
+        {
+            BaseMenuClosed?.Invoke();
+        }
     }
 
     private void ToggleMenu(InputAction.CallbackContext _)

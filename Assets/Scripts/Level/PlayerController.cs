@@ -44,21 +44,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float cameraHorizontalSpeed = 200f;
     [Min(0)]
     [SerializeField] private float cameraVerticalSpeed = 130f;
-
-    [Header("Mouse Settings")]
     
-    [Range(0f, 2f)]
-    [SerializeField] private float mouseCameraSensitivity = 1f;
-
     [Header("Controller Settings")]
 
     [SerializeField] private Animator animator;
-    
-    [Range(0f, 2f)]
-    [SerializeField] private float controllerCameraSensitivity = 1f;
-    
-    [Tooltip("Invert Y-axis for Controller.")]
-    [SerializeField] private bool invertY = true;
+
     
     #endregion
 
@@ -244,13 +234,14 @@ public class PlayerController : MonoBehaviour
 
             float deltaTimeMultiplier = isMouseLook ? 1f : Time.deltaTime;
 
-            float sensitivity = isMouseLook ? mouseCameraSensitivity : controllerCameraSensitivity;
+            float sensitivity = isMouseLook ? PlayerPrefs.GetFloat(SettingsMenu.MouseSensitivityKey, SettingsMenu.DefaultMouseSensitivity) : PlayerPrefs.GetFloat(SettingsMenu.ControllerSensitivityKey, SettingsMenu.DefaultControllerSensitivity);
 
             lookInput *= deltaTimeMultiplier * sensitivity;
             
             // Vertical camera rotation around the X-axis of the player!
             // Additionally multiply with -1 if we are using the controller AND we want to invert the Y input.
-            cameraRotation.x += lookInput.y * cameraVerticalSpeed * (!isMouseLook && invertY ? -1 : 1);
+            bool invertY = !isMouseLook && SettingsMenu.GetBool(SettingsMenu.InvertYKey, SettingsMenu.DefaultInvertY);
+            cameraRotation.x += lookInput.y * cameraVerticalSpeed * (invertY ? -1 : 1);
             // Horizontal camera rotation around the Y-axis of the player!
             cameraRotation.y += lookInput.x * cameraHorizontalSpeed;
 

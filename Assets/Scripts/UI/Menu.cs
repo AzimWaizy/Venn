@@ -59,6 +59,18 @@ public class Menu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void Show()
+    {
+        //TODO DOTween
+        gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        //TODO DOTween
+        gameObject.SetActive(false);
+    }
+    
     private IEnumerator DelayedSelect(Selectable newSelection)
     {
         yield return null;
