@@ -49,7 +49,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClipping: 0
-    - _CloudAlpha: 1.5
+    - _CloudAlpha: 2
     - _CloudsPower: 0.7
     - _CloudsScale: 120
     - _DistortScale: 66
